@@ -10,9 +10,9 @@
             #region Movimentos do primeiro robô
             string[] coordenadasAtuais = posicoesIniciais[0].Split(' ');
 
-            int posicaoXRoboUm = Convert.ToInt32(coordenadasAtuais[0]);
-            int posicaoYRoboUm = Convert.ToInt32(coordenadasAtuais[1]);
-            char direcaoRoboUm = Convert.ToChar(coordenadasAtuais[2]);
+            Robo.posicaoXRoboUm = Convert.ToInt32(coordenadasAtuais[0]);
+            Robo.posicaoYRoboUm = Convert.ToInt32(coordenadasAtuais[1]);
+            Robo.direcaoRoboUm = Convert.ToChar(coordenadasAtuais[2]);
 
             char[] instrucoes = comandosIniciais[0].ToCharArray();
 
@@ -21,22 +21,22 @@
                 char instrucaoAtual = instrucoes[i];
 
                 if (instrucaoAtual == 'E')
-                    direcaoRoboUm = VirarEsquerdaRoboUm(direcaoRoboUm);
+                    Robo.VirarEsquerdaRoboUm();
 
                 else if (instrucaoAtual == 'D')
-                    direcaoRoboUm = VirarDireitaRoboUm(direcaoRoboUm);
+                    Robo.VirarDireitaRoboUm();
 
                 else if (instrucaoAtual == 'M')
-                    MoverRoboUm(ref posicaoXRoboUm, ref posicaoYRoboUm, direcaoRoboUm);
+                    Robo.MoverRoboUm();
             }
             #endregion
 
             #region Movimentos do segundo robô
             coordenadasAtuais = posicoesIniciais[1].Split(' ');
 
-            int posicaoXRoboDois = Convert.ToInt32(coordenadasAtuais[0]);
-            int posicaoYRoboDois = Convert.ToInt32(coordenadasAtuais[1]);
-            char direcaoRoboDois = Convert.ToChar(coordenadasAtuais[2]);
+            Robo.posicaoXRoboDois = Convert.ToInt32(coordenadasAtuais[0]);
+            Robo.posicaoYRoboDois = Convert.ToInt32(coordenadasAtuais[1]);
+            Robo.direcaoRoboDois = Convert.ToChar(coordenadasAtuais[2]);
 
             instrucoes = comandosIniciais[1].ToCharArray();
 
@@ -45,115 +45,20 @@
                 char instrucaoAtual = instrucoes[i];
 
                 if (instrucaoAtual == 'E')
-                    direcaoRoboDois = VirarEsquerdaRoboDois(direcaoRoboDois);
+                    Robo.VirarEsquerdaRoboDois();
 
                 else if (instrucaoAtual == 'D')
-                    direcaoRoboDois = VirarDireitaRoboDois(direcaoRoboDois);
+                    Robo.VirarDireitaRoboDois();
 
                 else if (instrucaoAtual == 'M')
-                    MoverRoboDois(ref posicaoXRoboDois, ref posicaoYRoboDois, direcaoRoboDois);
+                    Robo.MoverRoboDois();
             }
             #endregion
 
-            Console.WriteLine($"{posicaoXRoboUm} {posicaoYRoboUm} {direcaoRoboUm}");
-            Console.WriteLine($"{posicaoXRoboDois} {posicaoYRoboDois} {direcaoRoboDois}");
+            Console.WriteLine(Robo.ObterLocalizacaoRoboUm());
+            Console.WriteLine(Robo.ObterLocalizacaoRoboDois());
 
             Console.ReadLine();
-        }
-
-        private static void MoverRoboUm(ref int posicaoXRoboUm, ref int posicaoYRoboUm, char direcaoRoboUm)
-        {
-            if (direcaoRoboUm == 'N')
-                posicaoYRoboUm++;
-
-            else if (direcaoRoboUm == 'S')
-                posicaoYRoboUm--;
-
-            else if (direcaoRoboUm == 'O')
-                posicaoXRoboUm--;
-
-            else if (direcaoRoboUm == 'L')
-                posicaoXRoboUm++;
-        }
-
-        private static char VirarEsquerdaRoboUm(char direcaoRoboUm)
-        {
-            if (direcaoRoboUm == 'N')
-                direcaoRoboUm = 'O';
-
-            else if (direcaoRoboUm == 'O')
-                direcaoRoboUm = 'S';
-
-            else if (direcaoRoboUm == 'S')
-                direcaoRoboUm = 'L';
-
-            else if (direcaoRoboUm == 'L')
-                direcaoRoboUm = 'N';
-
-            return direcaoRoboUm;
-        }
-
-        private static char VirarDireitaRoboUm(char direcaoRoboUm)
-        {
-            if (direcaoRoboUm == 'N')
-                direcaoRoboUm = 'L';
-
-            else if (direcaoRoboUm == 'L')
-                direcaoRoboUm = 'S';
-
-            else if (direcaoRoboUm == 'S')
-                direcaoRoboUm = 'O';
-
-            else if (direcaoRoboUm == 'O')
-                direcaoRoboUm = 'N';
-            return direcaoRoboUm;
-        }
-
-        private static void MoverRoboDois(ref int posicaoXRoboDois, ref int posicaoYRoboDois, char direcaoRoboDois)
-        {
-            if (direcaoRoboDois == 'N')
-                posicaoYRoboDois++;
-
-            else if (direcaoRoboDois == 'S')
-                posicaoYRoboDois--;
-
-            else if (direcaoRoboDois == 'O')
-                posicaoXRoboDois--;
-
-            else if (direcaoRoboDois == 'L')
-                posicaoXRoboDois++;
-        }
-
-        private static char VirarEsquerdaRoboDois(char direcaoRoboDois)
-        {
-            if (direcaoRoboDois == 'N')
-                direcaoRoboDois = 'O';
-
-            else if (direcaoRoboDois == 'O')
-                direcaoRoboDois = 'S';
-
-            else if (direcaoRoboDois == 'S')
-                direcaoRoboDois = 'L';
-
-            else if (direcaoRoboDois == 'L')
-                direcaoRoboDois = 'N';
-            return direcaoRoboDois;
-        }
-
-        private static char VirarDireitaRoboDois(char direcaoRoboDois)
-        {
-            if (direcaoRoboDois == 'N')
-                direcaoRoboDois = 'L';
-
-            else if (direcaoRoboDois == 'L')
-                direcaoRoboDois = 'S';
-
-            else if (direcaoRoboDois == 'S')
-                direcaoRoboDois = 'O';
-
-            else if (direcaoRoboDois == 'O')
-                direcaoRoboDois = 'N';
-            return direcaoRoboDois;
         }
     }
 }
