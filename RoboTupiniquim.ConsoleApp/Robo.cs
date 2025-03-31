@@ -1,12 +1,31 @@
 ﻿namespace RoboTupiniquim.ConsoleApp
 {
-    public static class RoboDois
+    public class Robo
     {
-        public static int posicaoX;
-        public static int posicaoY;
-        public static char direcao;
+        public string nome;
 
-        public static void Mover()
+        public int posicaoX;
+        public int posicaoY;
+        public char direcao;
+
+        public void Explorar(char[] instrucoes)
+        {
+            for (int i = 0; i < instrucoes.Length; i++)
+            {
+                char instrucaoAtual = instrucoes[i];
+
+                if (instrucaoAtual == 'E')
+                    VirarEsquerda();
+
+                else if (instrucaoAtual == 'D')
+                    VirarDireita();
+
+                else if (instrucaoAtual == 'M')
+                    Mover();
+            }
+        }
+
+        public void Mover()
         {
             if (direcao == 'N')
                 posicaoY++;
@@ -21,7 +40,7 @@
                 posicaoX++;
         }
 
-        public static void VirarEsquerda()
+        public void VirarEsquerda()
         {
             if (direcao == 'N')
                 direcao = 'O';
@@ -36,7 +55,7 @@
                 direcao = 'N';
         }
 
-        public static void VirarDireita()
+        public void VirarDireita()
         {
             if (direcao == 'N')
                 direcao = 'L';
@@ -51,7 +70,7 @@
                 direcao = 'N';
         }
 
-        public static string ObterLocalizacao()
+        public string ObterLocalizacao()
         {
             return $"{posicaoX} {posicaoY} {direcao}";
         }

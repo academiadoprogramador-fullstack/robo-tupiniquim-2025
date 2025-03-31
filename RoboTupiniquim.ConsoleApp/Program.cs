@@ -7,52 +7,32 @@
             string[] posicoesIniciais = ["1 2 N", "3 3 L"];
             string[] comandosIniciais = ["EMEMEMEMM", "MMDMMDMDDM"];
 
-            string[] coordenadasAtuais = posicoesIniciais[0].Split(' ');
+            string[] nomesRobos = ["Gabriel", "Leonardo"];
 
-            RoboUm.posicaoX = Convert.ToInt32(coordenadasAtuais[0]);
-            RoboUm.posicaoY = Convert.ToInt32(coordenadasAtuais[1]);
-            RoboUm.direcao = Convert.ToChar(coordenadasAtuais[2]);
+            int quantidadeRobos = 2;
 
-            char[] instrucoes = comandosIniciais[0].ToCharArray();
+            Robo[] robos = new Robo[quantidadeRobos];
 
-            for (int i = 0; i < instrucoes.Length; i++)
+            for (int contador = 0; contador < robos.Length; contador++)
             {
-                char instrucaoAtual = instrucoes[i];
+                string[] coordenadasAtuais = posicoesIniciais[contador].Split(' ');
 
-                if (instrucaoAtual == 'E')
-                    RoboUm.VirarEsquerda();
+                Robo robo = new Robo();
 
-                else if (instrucaoAtual == 'D')
-                    RoboUm.VirarDireita();
+                robo.nome = nomesRobos[contador];
+                robo.posicaoX = Convert.ToInt32(coordenadasAtuais[0]);
+                robo.posicaoY = Convert.ToInt32(coordenadasAtuais[1]);
+                robo.direcao = Convert.ToChar(coordenadasAtuais[2]);
 
-                else if (instrucaoAtual == 'M')
-                    RoboUm.Mover();
+                char[] instrucoes = comandosIniciais[contador].ToCharArray();
+
+                robo.Explorar(instrucoes);
+
+                robos[contador] = robo;
             }
 
-            coordenadasAtuais = posicoesIniciais[1].Split(' ');
-
-            RoboDois.posicaoX = Convert.ToInt32(coordenadasAtuais[0]);
-            RoboDois.posicaoY = Convert.ToInt32(coordenadasAtuais[1]);
-            RoboDois.direcao = Convert.ToChar(coordenadasAtuais[2]);
-
-            instrucoes = comandosIniciais[1].ToCharArray();
-
-            for (int i = 0; i < instrucoes.Length; i++)
-            {
-                char instrucaoAtual = instrucoes[i];
-
-                if (instrucaoAtual == 'E')
-                    RoboDois.VirarEsquerda();
-
-                else if (instrucaoAtual == 'D')
-                    RoboDois.VirarDireita();
-
-                else if (instrucaoAtual == 'M')
-                    RoboDois.Mover();
-            }
-
-            Console.WriteLine(RoboUm.ObterLocalizacao());
-            Console.WriteLine(RoboDois.ObterLocalizacao());
+            foreach (Robo robo in robos)
+                Console.WriteLine(robo.ObterLocalizacao());
 
             Console.ReadLine();
         }
